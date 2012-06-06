@@ -35,6 +35,11 @@ results = zeros(size(X,1),size(all_theta,1))
 for i = 1:size(all_theta,1)
     results(:,i) = (all_theta(i,:)*X')'
 end
+maxresults = repmat(max(sigmoid(results),[],2),1,num_labels)
+indicator = (maxresults == sigmoid(results))
+t = repmat([1 2 3 4],size(maxresults,1),1) .* indicator
+p = max(t,[],2)
+
 
 
 
