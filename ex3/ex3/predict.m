@@ -23,18 +23,18 @@ p = zeros(size(X, 1), 1);
 
 
 for prediction = 1:m
-    results1 = zeros(25,1);
-    for i = 1:25
+    results1 = zeros(size(Theta1,1),1);
+    for i = 1:size(Theta1,1)
         results1(i) = sigmoid(Theta1(i,:)*[1, X(prediction,:)]');
     end
 
     results2 = zeros(10,1);
-    for j = 1:10
+    for j = 1:num_labels
         results2(j) = sigmoid(Theta2(j,:)*[1; results1]);
     end
 
 
-    p(prediction) = (max(results2) == results2)'*[10; (1:9)'];
+    p(prediction) = (max(results2) == results2)'*[1:10]';
 end
 
 
