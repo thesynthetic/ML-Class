@@ -62,7 +62,18 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% 400 input layer units
+% 25 units in hidden layer (layer 2)
+% 10 output units (K = 10)
+% 5000 training examples (m = 5000)
 
+num_training_samples = size(X,1);
+num_layers = 3;
+
+
+for i = 1:m
+    test = log(sigmoid(Theta2*[1;sigmoid(Theta1*[i,X(1,:)]')]));
+end
 
 
 
