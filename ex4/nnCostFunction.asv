@@ -74,15 +74,15 @@ sum_test = 0;
 
 for i = 1:m
     z = zeros(10,1);
-    z(y(i)) = 1;
-    test = sum(-z.*log(sigmoid(Theta2*[1;sigmoid(Theta1*[1,X(i,:)]')])) - (1-z).*log(1-sigmoid(Theta2*[1;sigmoid(Theta1*[1,X(i,:)]')]))) ;
+    z(mod(y(i),10)+1) = 1;    
+    test = sum(-z.*log(sigmoid(Theta2*[1;sigmoid(Theta1*[i,X(i,:)]')])) - (1-z).*log(1-sigmoid(Theta2*[1;sigmoid(Theta1*[i,X(i,:)]')]))) ;
     sum_test = sum_test + test;
 end
+
 J = sum_test/m;
 
 
-Theta1_grad
-Theta2_grad
+
 
 
 
