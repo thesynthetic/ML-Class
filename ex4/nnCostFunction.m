@@ -81,18 +81,22 @@ end
 J = sum_test/m;
 
 
-a = zeros(size(X,2),3);
+a = zeros(size(X,2)+1,3);
 
 for i = 1:m
-    a(:,1) = X(i,:)'
-    a(1:size(Theta1,1)+1,2)  =  [1; sigmoid(Theta1*[1;a(:,1)])];
+    a(:,1) = [1;X(i,:)'];
+    a(1:size(Theta1,1)+1,2)  =  [1; sigmoid(Theta1*[a(:,1)])];
     a(1:size(Theta2,1),3) = [sigmoid(Theta2*a(1:size(Theta1,1)+1,2))]; 
         
     z = zeros(10,1);
     z(y(i)) = 1;
     
-    a(1:size(Theta2,1),3) - z;
+
+    error3 = a(1:size(Theta2,1),3) - z;
+    error2 = Theta2'*error3 .* (a(1:size(Theta1,1)+1,2) .* (1-a(1:size(Theta1,1)+1,2)));
     
+   Theta2_grad = Theta2_grad + (a(1:size(Theta1,1)+1,2) * error3')';
+   Theta1_grad = Theta1_grad + (a(:,1) * error2')';
 end
 
 
